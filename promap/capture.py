@@ -1,6 +1,7 @@
 import promap
 import cv2
 import logging
+import platform
 import threading
 import time
 
@@ -9,11 +10,15 @@ class CaptureError(promap.PromapError):
 
 def open_camera(camera):
     if camera is None:
-        cap = cv2.VideoCapture()
+        cap = cv2.VideoCapture(0)
         if not cap.isOpened():
-            raise CaptureError("Could not open default capture device") 
+            raise CaptureError("Could not open default capture device")
     else:
-        cap = cv2.VideoCapture(camera)
+        try:
+            camera_id = int(camera)
+        except (ValueError, TypeError):
+            camera_id = camera
+        cap = cv2.VideoCapture(camera_id)
         if not cap.isOpened():
             raise CaptureError("Could not open {}".format(camera))
     return cap
@@ -63,7 +68,8 @@ def perform_capture(cap):
 def capture(camera, width, height):
     # Open camera
     cap = open_camera(camera)
-    cap.set(cv2.CAP_PROP_SETTINGS, 1)
+    if platform.system() != "Darwin":
+        cap.set(cv2.CAP_PROP_SETTINGS, 1)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
     w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)

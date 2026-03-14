@@ -30,6 +30,8 @@ setuptools.setup(
     install_requires=[
         'numpy',
         'scipy',
+        'opencv-python',
+        'PyQt5',
     ],
     entry_points = {
         'console_scripts': ['promap=promap:main'],

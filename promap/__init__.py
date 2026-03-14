@@ -378,8 +378,8 @@ def op_invert(args):
             im = int_to_float(im)
             x = im[:,:,2]
             y = im[:,:,1]
-            x = np.round(x * args.projector_size[0]).astype(np.int)
-            y = np.round(y * args.projector_size[1]).astype(np.int)
+            x = np.round(x * args.projector_size[0]).astype(int)
+            y = np.round(y * args.projector_size[1]).astype(int)
         else:
             x = im[:,:,2]
             y = im[:,:,1]
@@ -464,8 +464,8 @@ def op_reproject(args):
             im = int_to_float(im)
             x = im[:,:,2]
             y = im[:,:,1]
-            x = np.round(x * args.camera_size[0]).astype(np.int)
-            y = np.round(y * args.camera_size[1]).astype(np.int)
+            x = np.round(x * args.camera_size[0]).astype(int)
+            y = np.round(y * args.camera_size[1]).astype(int)
             args.lookup_image = np.dstack((x, y))
         else:
             args.lookup_image = np.dstack((im[:,:,2], im[:,:,1]))

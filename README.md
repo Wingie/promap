@@ -93,6 +93,30 @@ This map was then brought into Radiance, and used as an input to `uvmap` and `ma
 
 The result is the GIF at the top of this page.
 
+## Live Reprojection
+
+Once you have a lookup table from scanning, you can reproject a live webcam feed in real-time.
+
+Two demo scripts are included:
+
+- `live_reproject.py` — uses scipy (the current `reproject.py` implementation), ~2-3 FPS at 640x480
+- `live_reproject_fast.py` — uses `cv2.remap`, ~600 FPS at 1920x1080
+
+```
+python live_reproject_fast.py
+```
+
+Shows a side-by-side window: raw webcam on the left, remapped view on the right. Press `q` to quit.
+
+### Benchmark
+
+| Method | Latency | FPS | Resolution |
+|---|---|---|---|
+| `scipy.interpolate` (current) | 424 ms | 2.4 | 1920x1080 |
+| `cv2.remap` | 1.7 ms | 603 | 1920x1080 |
+
+Run `python benchmark_reproject.py` to reproduce.
+
 ## What is the status of the project?
 
 It should work, but it is not thoroughly tested. Please let me know if there are any problems or feature requests!

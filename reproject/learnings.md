@@ -50,6 +50,19 @@ Tested live webcam → scipy reproject with synthetic barrel distortion lookup t
 - Distortion is visible at edges (barrel distortion applied)
 - scipy manages ~2-3 FPS at 640x480 (too slow for real-time)
 
+## Kinect v2 setup
+
+libfreenect2 is built at `~/code/libfreenect2/` with Python bindings in the venv. The dylib isn't on the default path, so before using it:
+
+```bash
+export DYLD_LIBRARY_PATH=~/code/libfreenect2/build/lib
+source ~/code/libfreenect2/venv/bin/activate
+```
+
+There's also `~/code/KinectV2_Syphon/` — an openFrameworks app that sends Kinect v2 to Syphon (makes it available as a video source to other macOS apps).
+
+The Kinect is physically in the office — untested with promap so far.
+
 ## Key technical details
 
 - Lookup images encode X in blue channel, Y in green channel (BGR format, OpenCV convention)

@@ -1,0 +1,34 @@
+Metadata-Version: 2.4
+Name: promap
+Version: 0.0.2
+Summary: Projection mapping pipeline
+Home-page: https://github.com/ervanalb/promap
+Author: Eric Van Albert
+Author-email: eric@van.al
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: scipy
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+`promap` is a command-line tool that you can use
+in conjunction with your digital video workflow
+to do projection mapping.
+
+`promap` uses a projector and a single camera
+to compute the physical scene as viewed from the projector,
+as well as a coarse disparity (depth) map.
+
+You can import the maps that it generates straight into your [digital video workflow](https://radiance.video),
+or you can post-process them into masks and uvmaps first using image processing tools.

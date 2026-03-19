@@ -128,6 +128,9 @@ class ZoneTracker:
 
         self.prev_masks = new_segs
         self.zone_ids = ids
+        self._last_iou_matrix = iou_matrix
+        self._last_matched = len(used_new)
+        self._last_fresh = n_new - len(used_new)
         return ids
 
 
@@ -248,6 +251,14 @@ def main():
 
         # FPS label
         fps = 1.0 / dt if dt > 0 else 0
+        # Zone tracking debug info
+        if args.verbose and hasattr(tracker, '_last_iou_matrix'):
+            iou_m = tracker._last_iou_matrix
+            best_ious = iou_m.max(axis=1).tolist() if iou_m.size else []
+            z_ids = tracker.zone_ids
+            print(f"\n  zones:{n_masks} matched:{tracker._last_matched} fresh:{tracker._last_fresh} "
+                  f"bestIoU:{[f'{v:.2f}' for v in best_ious]} ids:{z_ids}", flush=True)
+
         label = f"FastSAM: {dt*1000:.1f}ms ({fps:.0f} FPS) | {n_masks} zones"
 
         if benchmark:

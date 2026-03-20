@@ -1,0 +1,3 @@
+*.pth
+test_zones_masks/
+test_zones.png
